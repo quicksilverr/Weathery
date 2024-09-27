@@ -1,42 +1,7 @@
-type WeatherImage = Record<
-  'day' | 'night',
-  {
-    description: string;
-    image: string;
-  }
->;
+import { WeatherCode, WeatherImage } from "./type";
 
-type WeatherCode =
-  | '0'
-  | '1'
-  | '2'
-  | '3'
-  | '45'
-  | '48'
-  | '51'
-  | '53'
-  | '55'
-  | '56'
-  | '57'
-  | '61'
-  | '63'
-  | '65'
-  | '66'
-  | '67'
-  | '71'
-  | '73'
-  | '75'
-  | '77'
-  | '80'
-  | '81'
-  | '82'
-  | '85'
-  | '86'
-  | '95'
-  | '96'
-  | '99';
 
-const items: Record<WeatherCode, WeatherImage> = {
+export const items: Record<WeatherCode, WeatherImage> = {
   '0': {
     day: {
       description: 'Sunny',
@@ -330,6 +295,7 @@ const items: Record<WeatherCode, WeatherImage> = {
  */
 function getWeatherImage(weatherCode: WeatherCode) {
   // Write implementation for this function to return the "day" image for a given weather code.
+  return items[weatherCode]?.day;
 }
 
 export default getWeatherImage;
