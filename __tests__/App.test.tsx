@@ -1,12 +1,25 @@
-import 'react-native';
+import React from 'react';
+import {render} from '@testing-library/react-native';
 import App from '../App';
 
-import {render, screen} from '@testing-library/react-native';
+jest.mock('../src/screens/HomeScreen', () => {
+  const {Text} = require('react-native');
+  return {
+    HomeScreen: () => <Text>Home Screen</Text>,
+  };
+});
 
-it('should render the App', () => {
-  render(<App />);
+jest.mock('../src/screens/SearchScreen', () => {
+  const {Text} = require('react-native');
 
-  expect(
-    screen.getByText('Open up App.tsx to start working on your app!'),
-  ).toBeTruthy();
+  return {
+    SearchScreen: () => <Text>Search Screen</Text>,
+  };
+});
+
+describe('App Component', () => {
+  test('renders the navigation container with HomeScreen', async () => {
+    const {getByText} = render(<App />);
+    expect(getByText('Home Screen')).toBeTruthy();
+  });
 });
